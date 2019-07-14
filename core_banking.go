@@ -5,7 +5,6 @@ import "time"
 var (
 	MarkPaymentsAsPaidMeetsDeadline = BatchProcessingSLO{
 		BaseSLO:  BaseSLO{"MarkPaymentsAsPaid meets deadline", 0.1},
-		Labels:   []string{"namespace", "release"},
 		Deadline: time.Duration(2) * time.Hour,
 		Volume: `
 1.5 * max_over_time(

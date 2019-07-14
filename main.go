@@ -155,7 +155,6 @@ func (b BaseSLO) Labels() map[string]string {
 
 type BatchProcessingSLO struct {
 	BaseSLO
-	Labels     []string
 	Deadline   time.Duration
 	Volume     string
 	Throughput string
