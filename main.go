@@ -47,7 +47,7 @@ var (
 			Record: "job:slo_batch_error:interval",
 			Expr: `
 1.0 - clamp_max(
-  job:slo_batch_throughput:interval / jojb:slo_batch_throughput_target:max,
+  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,
   1.0
 )
 			`,

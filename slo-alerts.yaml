@@ -25,7 +25,7 @@ groups:
     labels:
       name: MarkPaymentsAsPaid meets deadline
   - record: job:slo_batch_error:interval
-    expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / jojb:slo_batch_throughput_target:max,\n
+    expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,\n
       \ 1.0\n)\n\t\t\t"
   - record: job:slo_error:ratio1m
     expr: avg_over_time(job:slo_batch_score:interval[1m])
