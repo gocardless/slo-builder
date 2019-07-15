@@ -129,3 +129,44 @@ target throughput, and the rate at which you burn it is dependent on how
 significantly you fail to meet it. It's also important to note that minutes
 where the throughput greatly exceeds the target don't 'recoup' error budget-
 this is an implementation decision, and might be the wrong choice.
+
+## Alerting
+
+Every SLO template conforms to our definition of an SLO, which is something that
+has a name, associated error budget and a constantly refreshed error ratio. In
+Prometheus terms, that means your SLOs will eventually produce the following
+time series:
+
+- `job:slo_error:ratio1m`
+- `job:slo_error:ratio5m`
+- `job:slo_error:ratio30m`
+- `job:slo_error:ratio1h`
+- `job:slo_error:ratio6h`
+- `job:slo_error:ratio1d`
+- `job:slo_error:ratio7d`
+
+As we get these series for every SLO, we can write generic alerting rules that
+work across any SLO. It happens that building useful alerts on SLO measurements
+is more complex than it might seem, and leveraging generic alerts is a huge
+benefit for simplicity.
+
+We use a combination of the [SRE
+workbook](https://landing.google.com/sre/workbook/chapters/alerting-on-slos/)
+and [SoundCloud: Alerting on SLOs like
+Pros](https://developers.soundcloud.com/blog/alerting-on-slos) to form
+multi-window error budget burn alerts. The term 'multi-window' indicates that
+alerts are only triggered when error budget is being burned in both short and
+long-term intervals: this reduces alert false positives and improves alert reset
+time, causing alerts to resolve as soon as the problem has been corrected
+instead of hours after.
+
+Depending on the urgency of the detected error, we'll either page an on-call
+engineer or open a ticket to handle the error budget burn in business hours. The
+detection sensitivity windows are listed here:
+
+| Alert | Long Window | Short Window | `for` Duration | Burn Rate Factor | Error Budget Consumed |
+| --- | --- | --- | --- | --- | --- |
+| Page | 1h | 5m | 2m | 14.4 | 2% |
+| Page | 6h | 30m | 15m | 6 | 5% |
+| Ticket | 1d | 2h | 1h | 3 | 10% |
+| Ticket | 3d | 6h | 1h | 1 | 10% |
