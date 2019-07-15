@@ -170,3 +170,7 @@ detection sensitivity windows are listed here:
 | Page | 6h | 30m | 15m | 6 | 5% |
 | Ticket | 1d | 2h | 1h | 3 | 10% |
 | Ticket | 3d | 6h | 1h | 1 | 10% |
+
+Every SLO created with this framework is automatically subscribed to these
+alerts. Where they get routed- both who is paged, and where a ticket gets
+created- depends on the team assigned to the SLO.
