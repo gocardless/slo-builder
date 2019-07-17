@@ -43,6 +43,8 @@ groups:
     expr: avg_over_time(job:slo_batch_error:interval[3d])
   - record: job:slo_error:ratio7d
     expr: avg_over_time(job:slo_batch_error:interval[7d])
+  - record: job:slo_error:ratio28d
+    expr: avg_over_time(job:slo_batch_error:interval[28d])
   - alert: SLOErrorBudgetFastBurn
     expr: "\n(\n  job:slo_error:ratio1h > on(name) (14.4 * job:slo_error_budget:ratio)\nand\n
       \ job:slo_error:ratio5m > on(name) (14.4 * job:slo_error_budget:ratio)\n)\nor\n(\n

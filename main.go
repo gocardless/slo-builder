@@ -31,7 +31,7 @@ func MustRegister(rules ...rulefmt.Rule) {
 
 var (
 	// AlertWindows are common interval windows we want to precompute
-	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "3d", "7d"}
+	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "3d", "7d", "28d"}
 
 	// SLORules is where each SLO should place the appropriate rules that power the
 	// post-processing and alert trailers.
