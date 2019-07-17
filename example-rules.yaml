@@ -1,27 +1,48 @@
 groups:
-- name: slo-framework
+- name: slo-builder
   rules:
   - record: job:slo_definition:none
     expr: "1"
     labels:
       budget: "0.100000"
+      deadline: 2h
       name: MarkPaymentsAsPaidMeetsDeadline
+      throughput: |
+        sum by (namespace, release) (
+          rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
+        ) > 0
+      volume: |
+        1.5 * max_over_time(
+          (
+            sum by (namespace, release) (
+              increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])
+            )
+          )[60d:1h]
+        )
   - record: job:slo_error_budget:ratio
     expr: "0.100000"
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_volume:max
-    expr: "\n1.5 * max_over_time(\n  (\n    sum by (namespace, release) (\n      increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])\n
-      \   )\n  )[60d:1h]\n)\n\t\t"
+    expr: |
+      1.5 * max_over_time(
+        (
+          sum by (namespace, release) (
+            increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])
+          )
+        )[60d:1h]
+      )
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput_target:max
-    expr: job:slo_batch_volume:max / 3600
+    expr: job:slo_batch_volume:max / 7200
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput:interval
-    expr: "\nsum by (namespace, release) (\n  rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])\n)
-      > 0\n\t\t"
+    expr: |
+      sum by (namespace, release) (
+        rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
+      ) > 0
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_error:interval
@@ -61,4 +82,3 @@ groups:
     for: 1h
     labels:
       severity: ticket
-

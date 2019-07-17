@@ -1,4 +1,4 @@
-.PHONY: slo-alerts.yaml
+.PHONY: example-rules.yaml
 
-slo-alerts.yaml:
-	go run . > $@
+example-rules.yaml:
+	go run cmd/slo-builder/main.go build example-definitions.yaml > $@
