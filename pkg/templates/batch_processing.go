@@ -78,19 +78,19 @@ func (b BatchProcessingSLO) Rules() []rulefmt.Rule {
 		),
 		rulefmt.Rule{
 			Record: "job:slo_batch_volume:max",
-			Labels: b.JoinLabels(),
+			Labels: b.joinLabels(),
 			Expr:   b.Volume,
 		},
 		rulefmt.Rule{
 			Record: "job:slo_batch_throughput_target:max",
-			Labels: b.JoinLabels(),
+			Labels: b.joinLabels(),
 			Expr: fmt.Sprintf(
 				`job:slo_batch_volume:max / %d`, time.Duration(b.Deadline)/time.Second,
 			),
 		},
 		rulefmt.Rule{
 			Record: "job:slo_batch_throughput:interval",
-			Labels: b.JoinLabels(),
+			Labels: b.joinLabels(),
 			Expr:   b.Throughput,
 		},
 	)

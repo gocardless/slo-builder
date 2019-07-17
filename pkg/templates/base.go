@@ -41,7 +41,7 @@ func (b baseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
 	return []rulefmt.Rule{
 		rulefmt.Rule{
 			Record: "job:slo_definition:none",
-			Labels: b.JoinLabels(
+			Labels: b.joinLabels(
 				append(additionals, map[string]string{
 					"budget": fmt.Sprintf("%f", b.Budget),
 				})...,
@@ -50,14 +50,14 @@ func (b baseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
 		},
 		rulefmt.Rule{
 			Record: "job:slo_error_budget:ratio",
-			Labels: b.JoinLabels(),
+			Labels: b.joinLabels(),
 			Expr:   fmt.Sprintf("%f", b.Budget),
 		},
 	}
 }
 
-// JoinLabels allows templates to pass their additional labels into the definition rule
-func (b baseSLO) JoinLabels(additionals ...map[string]string) map[string]string {
+// joinLabels allows templates to pass their additional labels into the definition rule
+func (b baseSLO) joinLabels(additionals ...map[string]string) map[string]string {
 	labels := map[string]string{
 		"name": b.Name,
 	}
@@ -69,10 +69,4 @@ func (b baseSLO) JoinLabels(additionals ...map[string]string) map[string]string 
 	}
 
 	return labels
-}
-
-func (b baseSLO) Labels() map[string]string {
-	return map[string]string{
-		"name": b.Name,
-	}
 }
