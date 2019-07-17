@@ -54,8 +54,8 @@ func init() {
 //
 // The important characteristics of this SLO are:
 //
-//   - Error budget is consumed at a rate proportional to unmet target performance
-//   - Error budget is consumed even by batches that process less-than-maximum volume
+// - Error budget is consumed at a rate proportional to unmet target performance
+// - Error budget is consumed even by batches that process less-than-maximum volume
 //
 // One thing to note is that throughput exceeding the target threshold is considered 0%
 // error, rather than some negative error value. This is a deliberate choice to avoid

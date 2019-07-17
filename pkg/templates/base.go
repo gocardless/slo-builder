@@ -18,14 +18,14 @@ type SLO interface {
 // must have an associated name and error budget. From this we produce two Prometheus
 // rules:
 //
-// 1. job:slo_definition:none{name, budget, template_labels...}
-// 2. job:slo_error_budget:ratio{name}
+// - job:slo_definition:none{name, budget, template_labels...}
+// - job:slo_error_budget:ratio{name}
 //
-// The first (1) is to track how the definition of an SLO changes over time. By recording
-// the parameters provided to the template in a metric, it's easy to understand how other
-// dependent recording rules were modified.
+// The `slo_definition` is to track how the definition of an SLO changes over time. By
+// recording the parameters provided to the template in a metric, it's easy to understand
+// how other dependent recording rules were modified.
 //
-// The error budget (2) rule is required to power generic alerting rules. Every template
+// The `slo_error_budget` rule is required to power generic alerting rules. Every template
 // will eventually produce job:slo_error:ratio<I> rules, which together with the error
 // budget can determine when to fire alerts.
 type BaseSLO struct {
