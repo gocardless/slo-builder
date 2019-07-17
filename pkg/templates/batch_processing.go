@@ -54,18 +54,17 @@ func init() {
 //
 // The important characteristics of this SLO are:
 //
-//   - Error budget is consumed at a rate proportional to desired job performance
+//   - Error budget is consumed at a rate proportional to unmet target performance
 //   - Error budget is consumed even by batches that process less-than-maximum volume
 //
-// One thing to note is that throughput exceeding the target threshold is consider 0%
+// One thing to note is that throughput exceeding the target threshold is considered 0%
 // error, rather than some negative error value. This is a deliberate choice to avoid
-// encouraging spiky throughput values, but may be something we want to parameterise in
-// future.
+// encouraging spiky throughput values, but may be toggled in future.
 type BatchProcessingSLO struct {
 	BaseSLO
-	Deadline   Duration
-	Volume     string
-	Throughput string
+	Deadline   Duration // time after starting the batch that it must finish
+	Volume     string   // expected maximum volume to be processed by a single batch run
+	Throughput string   // measure of batch throughput
 }
 
 func (b BatchProcessingSLO) Rules() []rulefmt.Rule {

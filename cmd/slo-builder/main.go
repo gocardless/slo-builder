@@ -8,6 +8,7 @@ import (
 	"reflect"
 	"runtime"
 
+	// Use this package here, as it supports the Prometheus yaml tags for the RuleGroups
 	yaml "gopkg.in/yaml.v2"
 
 	"github.com/alecthomas/kingpin"
@@ -19,11 +20,11 @@ import (
 var logger kitlog.Logger
 
 var (
-	app = kingpin.New("slo-builder", "Build a Prometheus SLO pipelines from SLO templates").Version(versionStanza())
+	app = kingpin.New("slo-builder", "Build Prometheus SLO pipelines from SLO templates").Version(versionStanza())
 
 	listTemplates = app.Command("list-templates", "Lists available SLO templates")
 
-	build               = app.Command("build", "Builds the Prometheus RuleGroup from given SLO definitions")
+	build               = app.Command("build", "Builds a Prometheus RuleGroup from given SLO definitions")
 	buildName           = build.Flag("name", "Name of the generated Prometheus RuleGroup").Default("slo-builder").String()
 	buildSloDefinitions = build.Arg("slo-definitions", "Files containing list of SLO template instances").Strings()
 )
