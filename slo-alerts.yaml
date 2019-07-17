@@ -5,25 +5,25 @@ groups:
     expr: "1"
     labels:
       budget: "0.100000"
-      name: MarkPaymentsAsPaid meets deadline
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_error_budget:ratio
     expr: "0.100000"
     labels:
-      name: MarkPaymentsAsPaid meets deadline
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_volume:max
     expr: "\n1.5 * max_over_time(\n  (\n    sum by (namespace, release) (\n      increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])\n
       \   )\n  )[60d:1h]\n)\n\t\t"
     labels:
-      name: MarkPaymentsAsPaid meets deadline
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput_target:max
     expr: job:slo_batch_volume:max / 3600
     labels:
-      name: MarkPaymentsAsPaid meets deadline
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput:interval
     expr: "\nsum by (namespace, release) (\n  rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])\n)
       > 0\n\t\t"
     labels:
-      name: MarkPaymentsAsPaid meets deadline
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_error:interval
     expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,\n
       \ 1.0\n)\n\t\t\t"
@@ -39,6 +39,8 @@ groups:
     expr: avg_over_time(job:slo_batch_error:interval[6h])
   - record: job:slo_error:ratio1d
     expr: avg_over_time(job:slo_batch_error:interval[1d])
+  - record: job:slo_error:ratio3d
+    expr: avg_over_time(job:slo_batch_error:interval[3d])
   - record: job:slo_error:ratio7d
     expr: avg_over_time(job:slo_batch_error:interval[7d])
   - alert: SLOErrorBudgetFastBurn
