@@ -62,9 +62,9 @@ func init() {
 // encouraging spiky throughput values, but may be toggled in future.
 type BatchProcessingSLO struct {
 	baseSLO
-	Deadline   Duration // time after starting the batch that it must finish
-	Volume     string   // expected maximum volume to be processed by a single batch run
-	Throughput string   // measure of batch throughput
+	Deadline   serializeableDuration // time after starting the batch that it must finish
+	Volume     string                // expected maximum volume to be processed by a single batch run
+	Throughput string                // measure of batch throughput
 }
 
 func (b BatchProcessingSLO) Rules() []rulefmt.Rule {

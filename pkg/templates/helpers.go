@@ -45,18 +45,18 @@ func forIntervals(intervals []string, rule rulefmt.Rule) []rulefmt.Rule {
 	return rules
 }
 
-// Duration supports unmarshaling from JSON using the same logic Prometheus uses to
-// interpret human durations.
-type Duration time.Duration
+// serializableDuration supports unmarshaling from JSON using the same logic Prometheus
+// uses to interpret human durations.
+type serializeableDuration time.Duration
 
-func (d *Duration) UnmarshalJSON(payload []byte) error {
+func (d *serializeableDuration) UnmarshalJSON(payload []byte) error {
 	var human string
 	if err := json.Unmarshal(payload, &human); err != nil {
 		return err
 	}
 
 	parsed, err := model.ParseDuration(human)
-	*d = Duration(parsed)
+	*d = serializeableDuration(parsed)
 	return err
 }
 
