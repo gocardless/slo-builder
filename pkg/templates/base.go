@@ -8,7 +8,9 @@ import (
 
 // SLO the base interface type for all SLOs
 type SLO interface {
+	// GetName returns a globally unique name for the SLO
 	GetName() string
+	// Rules generates Prometheus recording rules that implement the SLO definition
 	Rules() []rulefmt.Rule
 }
 
