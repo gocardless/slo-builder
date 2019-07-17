@@ -94,15 +94,15 @@ and
 			},
 			Expr: `
 (
-  job:slo_error:ratio1d > on(name) (3.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
 and
-  job:slo_error:ratio2h > on(name) (3.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio2h > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
 )
 or
 (
-  job:slo_error:ratio3d > on(name) (1.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio3d > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
 and
-  job:slo_error:ratio6h > on(name) (1.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
 )
 			`,
 		},

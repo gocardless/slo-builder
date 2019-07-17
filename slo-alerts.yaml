@@ -52,10 +52,10 @@ groups:
     labels:
       severity: ticket
   - alert: SLOErrorBudgetSlowBurn
-    expr: "\n(\n  job:slo_error:ratio1d > on(name) (3.0 * job:slo_error_budget:ratio)\nand\n
-      \ job:slo_error:ratio2h > on(name) (3.0 * job:slo_error_budget:ratio)\n)\nor\n(\n
-      \ job:slo_error:ratio3d > on(name) (1.0 * job:slo_error_budget:ratio)\nand\n
-      \ job:slo_error:ratio6h > on(name) (1.0 * job:slo_error_budget:ratio)\n)\n\t\t\t"
+    expr: "\n(\n  job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)\nand\n
+      \ job:slo_error:ratio2h > on(name) group_left() (3.0 * job:slo_error_budget:ratio)\n)\nor\n(\n
+      \ job:slo_error:ratio3d > on(name) group_left() (1.0 * job:slo_error_budget:ratio)\nand\n
+      \ job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)\n)\n\t\t\t"
     for: 1h
     labels:
       severity: ticket
