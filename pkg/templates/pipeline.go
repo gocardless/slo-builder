@@ -1,9 +1,6 @@
 package templates
 
 import (
-	"time"
-
-	"github.com/prometheus/common/model"
 	"github.com/prometheus/prometheus/pkg/rulefmt"
 )
 
@@ -44,55 +41,3 @@ func (p *Pipeline) Build() rulefmt.RuleGroups {
 		},
 	}
 }
-
-var (
-	// AlertWindows are common interval windows we want to precompute
-	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "3d", "7d", "28d"}
-
-	// AlertRules every SLO type produces rules that terminate in job:slo_error:ratio<I> and
-	// job:slo_error_budget's. Together, we can use these rules to power generic
-	// multi-window SLO error budget burn alerts, and these alert rules are run as the final
-	// part of the Pipeline generated RuleGroup.
-	AlertRules = []rulefmt.Rule{
-		rulefmt.Rule{
-			Alert: "SLOErrorBudgetFastBurn",
-			For:   model.Duration(time.Minute),
-			Labels: map[string]string{
-				"severity": "ticket", // TODO: "page",
-			},
-			Expr: `
-(
-  job:slo_error:ratio1h > on(name) (14.4 * job:slo_error_budget:ratio)
-and
-  job:slo_error:ratio5m > on(name) (14.4 * job:slo_error_budget:ratio)
-)
-or
-(
-  job:slo_error:ratio6h  > on(name) (6.0 * job:slo_error_budget:ratio)
-and
-  job:slo_error:ratio30m > on(name) (6.0 * job:slo_error_budget:ratio)
-)
-			`,
-		},
-		rulefmt.Rule{
-			Alert: "SLOErrorBudgetSlowBurn",
-			For:   model.Duration(time.Hour),
-			Labels: map[string]string{
-				"severity": "ticket",
-			},
-			Expr: `
-(
-  job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
-and
-  job:slo_error:ratio2h > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
-)
-or
-(
-  job:slo_error:ratio3d > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
-and
-  job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
-)
-			`,
-		},
-	}
-)
