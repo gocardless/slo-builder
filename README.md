@@ -34,13 +34,13 @@ templates to help inform your selections. This framework can then produce the
 rules (2) that generate a common input to multi-windowed alerts (3), which are
 included at the end of this SLO pipeline.
 
-## `BaseSLO`
+## `baseSLO`
 
-Every SLO has some common behaviour, as represented by the `BaseSLO` type. An
+Every SLO has some common behaviour, as represented by the `baseSLO` type. An
 example core SLO definition would be:
 
 ```go
-BaseSLO{
+baseSLO{
   Name: "MarkPaymentsAsPaidMeetsDeadline",
   ErrorBudget: 0.1,
 }
@@ -67,7 +67,7 @@ state as a batch process for which we want to apply an SLO.
 
 ```go
 MarkPaymentsAsPaidMeetsDeadline = BatchProcessingSLO{
-  BaseSLO:  BaseSLO{"MarkPaymentsAsPaidMeetsDeadline", 0.1},
+  baseSLO:  baseSLO{"MarkPaymentsAsPaidMeetsDeadline", 0.1},
   Deadline: time.Duration(2) * time.Hour,
   Volume: `
   1.5 * max_over_time(

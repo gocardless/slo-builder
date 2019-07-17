@@ -14,7 +14,7 @@ type SLO interface {
 	Rules() []rulefmt.Rule
 }
 
-// BaseSLO is at the core of every SLO. Regardless of which template is used, every SLO
+// baseSLO is at the core of every SLO. Regardless of which template is used, every SLO
 // must have an associated name and error budget. From this we produce two Prometheus
 // rules:
 //
@@ -28,16 +28,16 @@ type SLO interface {
 // The `slo_error_budget` rule is required to power generic alerting rules. Every template
 // will eventually produce job:slo_error:ratio<I> rules, which together with the error
 // budget can determine when to fire alerts.
-type BaseSLO struct {
+type baseSLO struct {
 	Name   string  `json:"name"`
 	Budget float64 `json:"budget"`
 }
 
-func (b BaseSLO) GetName() string {
+func (b baseSLO) GetName() string {
 	return b.Name
 }
 
-func (b BaseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
+func (b baseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
 	return []rulefmt.Rule{
 		rulefmt.Rule{
 			Record: "job:slo_definition:none",
@@ -57,7 +57,7 @@ func (b BaseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
 }
 
 // JoinLabels allows templates to pass their additional labels into the definition rule
-func (b BaseSLO) JoinLabels(additionals ...map[string]string) map[string]string {
+func (b baseSLO) JoinLabels(additionals ...map[string]string) map[string]string {
 	labels := map[string]string{
 		"name": b.Name,
 	}
@@ -71,7 +71,7 @@ func (b BaseSLO) JoinLabels(additionals ...map[string]string) map[string]string 
 	return labels
 }
 
-func (b BaseSLO) Labels() map[string]string {
+func (b baseSLO) Labels() map[string]string {
 	return map[string]string{
 		"name": b.Name,
 	}

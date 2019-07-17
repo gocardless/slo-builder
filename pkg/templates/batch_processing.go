@@ -61,7 +61,7 @@ func init() {
 // error, rather than some negative error value. This is a deliberate choice to avoid
 // encouraging spiky throughput values, but may be toggled in future.
 type BatchProcessingSLO struct {
-	BaseSLO
+	baseSLO
 	Deadline   Duration // time after starting the batch that it must finish
 	Volume     string   // expected maximum volume to be processed by a single batch run
 	Throughput string   // measure of batch throughput
@@ -69,7 +69,7 @@ type BatchProcessingSLO struct {
 
 func (b BatchProcessingSLO) Rules() []rulefmt.Rule {
 	return append(
-		b.BaseSLO.Rules(
+		b.baseSLO.Rules(
 			map[string]string{
 				"deadline":   model.Duration(b.Deadline).String(),
 				"volume":     b.Volume,
