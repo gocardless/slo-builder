@@ -77,7 +77,7 @@ MarkPaymentsAsPaidMeetsDeadline = BatchProcessingSLO{
       )
     )[60d:1h]
   )`,
-	Throughput: `
+  Throughput: `
   sum by (namespace, release) (
     rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
   ) > 0`,

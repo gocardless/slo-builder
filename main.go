@@ -19,7 +19,7 @@ import (
 // 	job:slo_batch_throughput:interval }
 
 // batch: {
-//   job:slo_batch_score:interval
+//   job:slo_batch_error:interval
 //   job:slo_error:ratio<I> }
 
 // SLOErrorBudgetFastBurn
@@ -31,7 +31,7 @@ func MustRegister(rules ...rulefmt.Rule) {
 
 var (
 	// AlertWindows are common interval windows we want to precompute
-	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "7d"}
+	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "3d", "7d"}
 
 	// SLORules is where each SLO should place the appropriate rules that power the
 	// post-processing and alert trailers.
@@ -57,7 +57,7 @@ var (
 		forIntervals(AlertWindows,
 			rulefmt.Rule{
 				Record: "job:slo_error:ratio%s",
-				Expr:   `avg_over_time(job:slo_batch_score:interval[%s])`,
+				Expr:   `avg_over_time(job:slo_batch_error:interval[%s])`,
 			},
 		),
 	)
