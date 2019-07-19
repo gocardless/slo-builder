@@ -45,6 +45,149 @@ groups:
       ) > 0
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
+  - record: job:slo_definition:none
+    expr: "1"
+    labels:
+      budget: "0.001000"
+      errors: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[%s])
+        )
+      name: PaymentsServiceSearchErrors
+      total: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
+        )
+  - record: job:slo_error_budget:ratio
+    expr: "0.001000"
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[1m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[5m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[30m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[1h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[6h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[1d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[3d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[7d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[28d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[1m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[5m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[30m])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[1h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[6h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[1d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[3d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[7d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[28d])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
   - record: job:slo_batch_error:interval
     expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,\n
       \ 1.0\n)\n\t\t\t"
@@ -66,6 +209,33 @@ groups:
     expr: avg_over_time(job:slo_batch_error:interval[7d])
   - record: job:slo_error:ratio28d
     expr: avg_over_time(job:slo_batch_error:interval[28d])
+  - record: job:slo_error:ratio1m
+    expr: ((job:slo_error_rate_errors:rate1m) or (0 * job:slo_error_rate_total:rate1m))
+      / job:slo_error_rate_total:rate1m
+  - record: job:slo_error:ratio5m
+    expr: ((job:slo_error_rate_errors:rate5m) or (0 * job:slo_error_rate_total:rate5m))
+      / job:slo_error_rate_total:rate5m
+  - record: job:slo_error:ratio30m
+    expr: ((job:slo_error_rate_errors:rate30m) or (0 * job:slo_error_rate_total:rate30m))
+      / job:slo_error_rate_total:rate30m
+  - record: job:slo_error:ratio1h
+    expr: ((job:slo_error_rate_errors:rate1h) or (0 * job:slo_error_rate_total:rate1h))
+      / job:slo_error_rate_total:rate1h
+  - record: job:slo_error:ratio6h
+    expr: ((job:slo_error_rate_errors:rate6h) or (0 * job:slo_error_rate_total:rate6h))
+      / job:slo_error_rate_total:rate6h
+  - record: job:slo_error:ratio1d
+    expr: ((job:slo_error_rate_errors:rate1d) or (0 * job:slo_error_rate_total:rate1d))
+      / job:slo_error_rate_total:rate1d
+  - record: job:slo_error:ratio3d
+    expr: ((job:slo_error_rate_errors:rate3d) or (0 * job:slo_error_rate_total:rate3d))
+      / job:slo_error_rate_total:rate3d
+  - record: job:slo_error:ratio7d
+    expr: ((job:slo_error_rate_errors:rate7d) or (0 * job:slo_error_rate_total:rate7d))
+      / job:slo_error_rate_total:rate7d
+  - record: job:slo_error:ratio28d
+    expr: ((job:slo_error_rate_errors:rate28d) or (0 * job:slo_error_rate_total:rate28d))
+      / job:slo_error_rate_total:rate28d
   - alert: SLOErrorBudgetFastBurn
     expr: "\n(\n  job:slo_error:ratio1h > on(name) (14.4 * job:slo_error_budget:ratio)\nand\n
       \ job:slo_error:ratio5m > on(name) (14.4 * job:slo_error_budget:ratio)\n)\nor\n(\n

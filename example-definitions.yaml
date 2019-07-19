@@ -17,3 +17,16 @@ definitions:
         sum by (namespace, release) (
           rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
         ) > 0
+
+  - template: ErrorRateSLO
+    definition:
+      name: PaymentsServiceSearchErrors
+      budget: 0.001
+      errors: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[%s])
+        )
+      total: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
+        )
