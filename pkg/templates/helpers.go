@@ -28,7 +28,7 @@ func flattenRules(elems ...interface{}) []rulefmt.Rule {
 	return flattened
 }
 
-// forIntervals takes a Rule with string interpolation (%s) for any placeholders that
+// forIntervals takes a Rule with string interpolation (%[1]s) for any placeholders that
 // should be templated with the given interval values.
 func forIntervals(intervals []string, rule rulefmt.Rule) []rulefmt.Rule {
 	rules := []rulefmt.Rule{}
@@ -38,6 +38,7 @@ func forIntervals(intervals []string, rule rulefmt.Rule) []rulefmt.Rule {
 			rulefmt.Rule{
 				Record: fmt.Sprintf(rule.Record, interval),
 				Expr:   fmt.Sprintf(rule.Expr, interval),
+				Labels: rule.Labels,
 			},
 		)
 	}
