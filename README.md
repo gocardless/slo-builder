@@ -141,6 +141,7 @@ time series:
 - `job:slo_error:ratio5m`
 - `job:slo_error:ratio30m`
 - `job:slo_error:ratio1h`
+- `job:slo_error:ratio2h`
 - `job:slo_error:ratio6h`
 - `job:slo_error:ratio1d`
 - `job:slo_error:ratio7d`
