@@ -90,6 +90,13 @@ groups:
       )
     labels:
       name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_errors:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[2h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
   - record: job:slo_error_rate_errors:rate6h
     expr: |
       sum by (namespace, release) (
@@ -153,6 +160,13 @@ groups:
       )
     labels:
       name: PaymentsServiceSearchErrors
+  - record: job:slo_error_rate_total:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[2h])
+      )
+    labels:
+      name: PaymentsServiceSearchErrors
   - record: job:slo_error_rate_total:rate6h
     expr: |
       sum by (namespace, release) (
@@ -199,6 +213,8 @@ groups:
     expr: avg_over_time(job:slo_batch_error:interval[30m])
   - record: job:slo_error:ratio1h
     expr: avg_over_time(job:slo_batch_error:interval[1h])
+  - record: job:slo_error:ratio2h
+    expr: avg_over_time(job:slo_batch_error:interval[2h])
   - record: job:slo_error:ratio6h
     expr: avg_over_time(job:slo_batch_error:interval[6h])
   - record: job:slo_error:ratio1d
@@ -221,6 +237,9 @@ groups:
   - record: job:slo_error:ratio1h
     expr: ((job:slo_error_rate_errors:rate1h) or (0 * job:slo_error_rate_total:rate1h))
       / job:slo_error_rate_total:rate1h
+  - record: job:slo_error:ratio2h
+    expr: ((job:slo_error_rate_errors:rate2h) or (0 * job:slo_error_rate_total:rate2h))
+      / job:slo_error_rate_total:rate2h
   - record: job:slo_error:ratio6h
     expr: ((job:slo_error_rate_errors:rate6h) or (0 * job:slo_error_rate_total:rate6h))
       / job:slo_error_rate_total:rate6h

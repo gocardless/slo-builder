@@ -43,7 +43,7 @@ var (
 	TemplateRules = []rulefmt.Rule{}
 
 	// AlertWindows are common interval windows we want to precompute
-	AlertWindows = []string{"1m", "5m", "30m", "1h", "6h", "1d", "3d", "7d", "28d"}
+	AlertWindows = []string{"1m", "5m", "30m", "1h", "2h", "6h", "1d", "3d", "7d", "28d"}
 
 	// AlertRules every SLO type produces rules that terminate in job:slo_error:ratio<I> and
 	// job:slo_error_budget's. Together, we can use these rules to power generic
