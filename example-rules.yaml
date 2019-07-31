@@ -211,7 +211,7 @@ groups:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
-      requestClass: "1"
+      request_class: "1"
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
@@ -389,7 +389,7 @@ groups:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
-      requestClass: "2.5"
+      request_class: "2.5"
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
