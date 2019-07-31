@@ -1,0 +1,23 @@
+---
+version: 2
+
+jobs:
+  promtool:
+    docker:
+      - image: golang:1.12
+    working_directory: /go/src/github.com/gocardless/slo-builder
+    steps:
+      - checkout
+      - run:
+          name: promtool check rules
+          command: |
+            curl --connect-timeout 15 --retry 3 -sfL \
+              https://github.com/prometheus/prometheus/releases/download/v2.11.1/prometheus-2.11.1.linux-amd64.tar.gz \
+              | tar --strip-components=1 -xzf - prometheus-2.11.1.linux-amd64/promtool
+            ./promtool check rules *-rules.yaml
+
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - promtool
