@@ -6,7 +6,7 @@ import (
 
 var (
 	// ErrorRateTemplateRules map from the job:slo_error_rate_total and
-	// job:slo_error_rate_errors time series to the SLO compliant
+	// job:slo_error_rate_errors time series to the SLO-compliant
 	// job:slo_error:ratio<I> series that are used to power alerts.
 	ErrorRateTemplateRules = flattenRules(
 		// Calculate error rate ratio
