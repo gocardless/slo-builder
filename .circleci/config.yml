@@ -5,6 +5,8 @@ jobs:
   promtool:
     docker:
       - image: golang:1.12
+        environment:
+          GO111MODULE: "ON"
     working_directory: /go/src/github.com/gocardless/slo-builder
     steps:
       - checkout
