@@ -202,6 +202,362 @@ groups:
       )
     labels:
       name: PaymentsServiceSearchErrors
+  - record: job:slo_definition:none
+    expr: "1"
+    labels:
+      budget: "0.100000"
+      name: AdminVerificationLatency90
+      observation: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
+        )
+      requestClass: "1"
+      total: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
+        )
+  - record: job:slo_error_budget:ratio
+    expr: "0.100000"
+    labels:
+      name: AdminVerificationLatency90
+  - record: job:slo_latency_total:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[5m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[30m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[2h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[6h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[3d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[7d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_total:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[28d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[1m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[5m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[30m])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[1h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[2h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[6h])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[1d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[3d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[7d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_latency_observation:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="1"}[28d])
+      )
+    labels:
+      name: AdminVerificationLatency90
+      request_class: "1"
+  - record: job:slo_definition:none
+    expr: "1"
+    labels:
+      budget: "0.010000"
+      name: AdminVerificationLatency99
+      observation: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
+        )
+      requestClass: "2.5"
+      total: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
+        )
+  - record: job:slo_error_budget:ratio
+    expr: "0.010000"
+    labels:
+      name: AdminVerificationLatency99
+  - record: job:slo_latency_total:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[5m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[30m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[2h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[6h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[1d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[3d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[7d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_total:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[28d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate1m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate5m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[5m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate30m
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[30m])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate1h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate2h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[2h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate6h
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[6h])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate1d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate3d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[3d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate7d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[7d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
+  - record: job:slo_latency_observation:rate28d
+    expr: |
+      sum by (namespace, release) (
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[28d])
+      )
+    labels:
+      name: AdminVerificationLatency99
+      request_class: "2.5"
   - record: job:slo_batch_error:interval
     expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,\n
       \ 1.0\n)\n\t\t\t"
@@ -255,6 +611,28 @@ groups:
   - record: job:slo_error:ratio28d
     expr: ((job:slo_error_rate_errors:rate28d) or (0 * job:slo_error_rate_total:rate28d))
       / job:slo_error_rate_total:rate28d
+  - record: job:slo_error:ratio1m
+    expr: (job:slo_latency_total:rate1m - job:slo_latency_observation:rate1m) / job:slo_latency_total:rate1m
+  - record: job:slo_error:ratio5m
+    expr: (job:slo_latency_total:rate5m - job:slo_latency_observation:rate5m) / job:slo_latency_total:rate5m
+  - record: job:slo_error:ratio30m
+    expr: (job:slo_latency_total:rate30m - job:slo_latency_observation:rate30m) /
+      job:slo_latency_total:rate30m
+  - record: job:slo_error:ratio1h
+    expr: (job:slo_latency_total:rate1h - job:slo_latency_observation:rate1h) / job:slo_latency_total:rate1h
+  - record: job:slo_error:ratio2h
+    expr: (job:slo_latency_total:rate2h - job:slo_latency_observation:rate2h) / job:slo_latency_total:rate2h
+  - record: job:slo_error:ratio6h
+    expr: (job:slo_latency_total:rate6h - job:slo_latency_observation:rate6h) / job:slo_latency_total:rate6h
+  - record: job:slo_error:ratio1d
+    expr: (job:slo_latency_total:rate1d - job:slo_latency_observation:rate1d) / job:slo_latency_total:rate1d
+  - record: job:slo_error:ratio3d
+    expr: (job:slo_latency_total:rate3d - job:slo_latency_observation:rate3d) / job:slo_latency_total:rate3d
+  - record: job:slo_error:ratio7d
+    expr: (job:slo_latency_total:rate7d - job:slo_latency_observation:rate7d) / job:slo_latency_total:rate7d
+  - record: job:slo_error:ratio28d
+    expr: (job:slo_latency_total:rate28d - job:slo_latency_observation:rate28d) /
+      job:slo_latency_total:rate28d
   - alert: SLOErrorBudgetFastBurn
     expr: "\n(\n  job:slo_error:ratio1h > on(name) (14.4 * job:slo_error_budget:ratio)\nand\n
       \ job:slo_error:ratio5m > on(name) (14.4 * job:slo_error_budget:ratio)\n)\nor\n(\n

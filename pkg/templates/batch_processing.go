@@ -9,8 +9,9 @@ import (
 )
 
 var (
-	// BatchProcessingTemplateRules map from the job:slo_batch_* time series to the SLO
-	// compliant job:slo_error:ratio<I> series that are used to power alerts.
+	// BatchProcessingTemplateRules map from the job:slo_batch_* time series to
+	// the SLO-compliant job:slo_error:ratio<I> series that are used to power
+	// alerts.
 	BatchProcessingTemplateRules = flattenRules(
 		// Calculate synthentic 'error score' for the batch as the percentage of target
 		// throughput we failed to achieve over the user defined interval.
