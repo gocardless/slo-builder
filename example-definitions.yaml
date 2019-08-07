@@ -35,7 +35,7 @@ definitions:
     definition:
       name: AdminVerificationLatency90
       budget: 0.1
-      requestClass: "1"
+      requestClass: "ok"
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
@@ -49,7 +49,7 @@ definitions:
     definition:
       name: AdminVerificationLatency99
       budget: 0.01
-      requestClass: "2.5"
+      requestClass: "slow+"
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])

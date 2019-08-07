@@ -211,7 +211,7 @@ groups:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
-      request_class: "1"
+      request_class: ok
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
@@ -227,7 +227,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate5m
     expr: |
       sum by (namespace, release) (
@@ -235,7 +235,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate30m
     expr: |
       sum by (namespace, release) (
@@ -243,7 +243,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate1h
     expr: |
       sum by (namespace, release) (
@@ -251,7 +251,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate2h
     expr: |
       sum by (namespace, release) (
@@ -259,7 +259,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate6h
     expr: |
       sum by (namespace, release) (
@@ -267,7 +267,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate1d
     expr: |
       sum by (namespace, release) (
@@ -275,7 +275,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate3d
     expr: |
       sum by (namespace, release) (
@@ -283,7 +283,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate7d
     expr: |
       sum by (namespace, release) (
@@ -291,7 +291,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_total:rate28d
     expr: |
       sum by (namespace, release) (
@@ -299,7 +299,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate1m
     expr: |
       sum by (namespace, release) (
@@ -307,7 +307,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate5m
     expr: |
       sum by (namespace, release) (
@@ -315,7 +315,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate30m
     expr: |
       sum by (namespace, release) (
@@ -323,7 +323,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate1h
     expr: |
       sum by (namespace, release) (
@@ -331,7 +331,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate2h
     expr: |
       sum by (namespace, release) (
@@ -339,7 +339,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate6h
     expr: |
       sum by (namespace, release) (
@@ -347,7 +347,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate1d
     expr: |
       sum by (namespace, release) (
@@ -355,7 +355,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate3d
     expr: |
       sum by (namespace, release) (
@@ -363,7 +363,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate7d
     expr: |
       sum by (namespace, release) (
@@ -371,7 +371,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_latency_observation:rate28d
     expr: |
       sum by (namespace, release) (
@@ -379,7 +379,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency90
-      request_class: "1"
+      request_class: ok
   - record: job:slo_definition:none
     expr: "1"
     labels:
@@ -389,7 +389,7 @@ groups:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
-      request_class: "2.5"
+      request_class: slow+
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
@@ -405,7 +405,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate5m
     expr: |
       sum by (namespace, release) (
@@ -413,7 +413,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate30m
     expr: |
       sum by (namespace, release) (
@@ -421,7 +421,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate1h
     expr: |
       sum by (namespace, release) (
@@ -429,7 +429,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate2h
     expr: |
       sum by (namespace, release) (
@@ -437,7 +437,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate6h
     expr: |
       sum by (namespace, release) (
@@ -445,7 +445,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate1d
     expr: |
       sum by (namespace, release) (
@@ -453,7 +453,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate3d
     expr: |
       sum by (namespace, release) (
@@ -461,7 +461,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate7d
     expr: |
       sum by (namespace, release) (
@@ -469,7 +469,7 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_total:rate28d
     expr: |
       sum by (namespace, release) (
@@ -477,87 +477,87 @@ groups:
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate1m
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1m])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[1m])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate5m
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[5m])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[5m])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate30m
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[30m])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[30m])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate1h
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1h])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[1h])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate2h
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[2h])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[2h])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate6h
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[6h])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[6h])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate1d
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[1d])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[1d])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate3d
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[3d])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[3d])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate7d
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[7d])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[7d])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_latency_observation:rate28d
     expr: |
       sum by (namespace, release) (
-        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="2.5"}[28d])
+        rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="5"}[28d])
       )
     labels:
       name: AdminVerificationLatency99
-      request_class: "2.5"
+      request_class: slow+
   - record: job:slo_batch_error:interval
     expr: "\n1.0 - clamp_max(\n  job:slo_batch_throughput:interval / job:slo_batch_throughput_target:max,\n
       \ 1.0\n)\n\t\t\t"
