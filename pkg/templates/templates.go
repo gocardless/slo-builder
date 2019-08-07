@@ -58,15 +58,15 @@ var (
 			},
 			Expr: `
 (
-  job:slo_error:ratio1h > on(name) (14.4 * job:slo_error_budget:ratio)
+  job:slo_error:ratio1h > on(name) group_left() (14.4 * job:slo_error_budget:ratio)
 and
-  job:slo_error:ratio5m > on(name) (14.4 * job:slo_error_budget:ratio)
+  job:slo_error:ratio5m > on(name) group_left() (14.4 * job:slo_error_budget:ratio)
 )
 or
 (
-  job:slo_error:ratio6h  > on(name) (6.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio6h > on(name) group_left() (6.0 * job:slo_error_budget:ratio)
 and
-  job:slo_error:ratio30m > on(name) (6.0 * job:slo_error_budget:ratio)
+  job:slo_error:ratio30m > on(name) group_left() (6.0 * job:slo_error_budget:ratio)
 )
 			`,
 		},
