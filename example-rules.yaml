@@ -7,6 +7,7 @@ groups:
       budget: "0.100000"
       deadline: 2h
       name: MarkPaymentsAsPaidMeetsDeadline
+      template: BatchProcessingSLO
       throughput: |
         sum by (namespace, release) (
           rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
@@ -54,6 +55,7 @@ groups:
           rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[%s])
         )
       name: PaymentsServiceSearchErrors
+      template: ErrorRateSLO
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
@@ -212,6 +214,7 @@ groups:
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
       request_class: "1"
+      template: LatencySLO
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])
@@ -390,6 +393,7 @@ groups:
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
       request_class: "2.5"
+      template: LatencySLO
       total: |
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler="Routes::AdminVerifications::Index"}[%s])

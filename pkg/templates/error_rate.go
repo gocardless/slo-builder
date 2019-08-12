@@ -37,6 +37,7 @@ func (e ErrorRateSLO) Rules() []rulefmt.Rule {
 	return flattenRules(
 		e.baseSLO.Rules(
 			map[string]string{
+				"template": "ErrorRateSLO",
 				"errors": e.Errors,
 				"total":  e.Total,
 			},

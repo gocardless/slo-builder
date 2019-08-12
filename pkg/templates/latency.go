@@ -46,6 +46,7 @@ func (l LatencySLO) Rules() []rulefmt.Rule {
 	return flattenRules(
 		l.baseSLO.Rules(
 			map[string]string{
+				"template":      "LatencySLO",
 				"request_class": l.RequestClass,
 				"total":         l.Total,
 				"observation":   l.Observation,

@@ -72,6 +72,7 @@ func (b BatchProcessingSLO) Rules() []rulefmt.Rule {
 	return append(
 		b.baseSLO.Rules(
 			map[string]string{
+				"template":   "BatchProcessingSLO",
 				"deadline":   model.Duration(b.Deadline).String(),
 				"volume":     b.Volume,
 				"throughput": b.Throughput,
