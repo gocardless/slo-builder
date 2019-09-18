@@ -1,36 +1,5 @@
 ---
 definitions:
-  - template: BatchProcessingSLO
-    definition:
-      name: MarkPaymentsAsPaidMeetsDeadline
-      budget: 0.1
-      deadline: 2h
-      volume: |
-        1.5 * max_over_time(
-          (
-            sum by (namespace, release) (
-              increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])
-            )
-          )[60d:1h]
-        )
-      throughput: |
-        sum by (namespace, release) (
-          rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
-        ) > 0
-
-  - template: ErrorRateSLO
-    definition:
-      name: PaymentsServiceSearchErrors
-      budget: 0.001
-      errors: |
-        sum by (namespace, release) (
-          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[%s])
-        )
-      total: |
-        sum by (namespace, release) (
-          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
-        )
-
   - template: LatencySLO
     definition:
       name: AdminVerificationLatency90
@@ -44,6 +13,8 @@ definitions:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
+      labels:
+        channel: alert-test
 
   - template: LatencySLO
     definition:
@@ -58,3 +29,5 @@ definitions:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
+      labels:
+        channel: alert-test

@@ -1,0 +1,16 @@
+---
+definitions:
+  - template: ErrorRateSLO
+    definition:
+      name: PaymentsServiceSearchErrors
+      budget: 0.001
+      errors: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search", status=~"5.."}[%s])
+        )
+      total: |
+        sum by (namespace, release) (
+          rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
+        )
+      labels:
+        channel: alert-test

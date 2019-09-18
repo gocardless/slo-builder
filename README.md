@@ -1,4 +1,4 @@
-# slo-alerts [![Documentation](https://godoc.org/github.com/gocardless/slo-builder/pkg/templates?status.svg)](http://godoc.org/github.com/gocardless/slo-builder/pkg/templates)
+# slo-builder [![Documentation](https://godoc.org/github.com/gocardless/slo-builder/pkg/templates?status.svg)](http://godoc.org/github.com/gocardless/slo-builder/pkg/templates)
 
 This repo provides a framework that developers can use to specify system SLOs
 without requiring in-depth Prometheus knowledge.
@@ -14,6 +14,42 @@ By forcing a homogenous format for every SLO, it becomes possible to apply
 generically useful rules to all different types of SLO. This is even more
 important when the implementation of such rules are so tricky, and the required
 learning to produce them so large.
+
+## Quick start
+
+1. Define a new SLO using one of the supported templates.
+
+```yaml
+---
+definitions:
+  - template: ErrorRateSLO
+    definition:
+      name: APIErrorRate
+      budget: 0.001
+      errors: |
+        rate(http_request_duration_seconds_count{status=~"5.."}[%s])
+      total: |
+        rate(http_request_duration_seconds_count[%s])
+```
+
+The above example, is using the `ErrorRateSLO` template, that requires the
+following:
+
+- `name` unique name for SLO definition.
+- `budget` error budget 0.1% in this case.
+- `errors` parameterize rate of error requests.
+- `total` parameterize rate of requests.
+
+> `%s` is replaced with multiple alert windows
+
+2. Generate Prometheus rules
+
+```bash
+$ slo-builder build examples/*-slo.yaml > examples/rules.yaml
+```
+
+> You can check more examples inside [examples](./examples) folder and the generated
+Prometheuls rules [examples/rules.yaml](./examples/rules.yaml)
 
 ## Steps to an SLO
 
@@ -34,7 +70,7 @@ templates to help inform your selections. This framework can then produce the
 rules (2) that generate a common input to multi-windowed alerts (3), which are
 included at the end of this SLO pipeline.
 
-## `baseSLO`
+### `baseSLO`
 
 Every SLO has some common behaviour, as represented by the `baseSLO` type. An
 example core SLO definition would be:
@@ -56,11 +92,20 @@ label that is assumed to be unique to each SLO, allowing Prometheus to join
 series on the `name` label.
 
 ```
-job:slo_definition:none{name="MarkPaymentsAsPaidMeetsDeadline",error_budget="0.1"} 1.0
-job:slo_error_budget:ratio{name="MarkPaymentsAsPaidMeetsDeadline"} 0.1
+job:slo_definition:none{name="MarkPaymentsAsPaidMeetsDeadline",budget="0.1",template="BatchProcessingSLO"} 1.0
+job:slo_error_budget:ratio{name="MarkPaymentsAsPaidMeetsDeadline"}
 ```
 
-## `BatchProcessingSLO`
+### `ErrorRateSLO`
+
+Template to construct SLOs based on error rate.
+
+
+### `LatencySLO`
+
+Template to construct SLOs based on latency.
+
+### `BatchProcessingSLO`
 
 We'll use an example of a process that transitions many payments into a paid
 state as a batch process for which we want to apply an SLO.

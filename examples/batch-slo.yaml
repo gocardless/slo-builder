@@ -1,0 +1,21 @@
+---
+definitions:
+  - template: BatchProcessingSLO
+    definition:
+      name: MarkPaymentsAsPaidMeetsDeadline
+      budget: 0.1
+      deadline: 2h
+      volume: |
+        1.5 * max_over_time(
+          (
+            sum by (namespace, release) (
+              increase(paysvc_mark_payments_as_paid_marked_as_paid_total[8h])
+            )
+          )[60d:1h]
+        )
+      throughput: |
+        sum by (namespace, release) (
+          rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
+        ) > 0
+      labels:
+        channel: alert-test
