@@ -17,6 +17,8 @@ definitions:
         sum by (namespace, release) (
           rate(paysvc_mark_payments_as_paid_marked_as_paid_total[1m])
         ) > 0
+      labels:
+        channel: slo-alerts
 
   - template: ErrorRateSLO
     definition:
@@ -30,6 +32,8 @@ definitions:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
         )
+      labels:
+        channel: slo-alerts
 
   - template: LatencySLO
     definition:
@@ -58,3 +62,5 @@ definitions:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_bucket{app="payments-service", handler="Routes::AdminVerifications::Index", le="%s"}[%s])
         )
+      labels:
+        channel: slo-alerts

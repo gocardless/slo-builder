@@ -4,10 +4,8 @@ go 1.12
 
 require (
 	github.com/alecthomas/kingpin v2.2.6+incompatible
-	github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc // indirect
 	github.com/ghodss/yaml v1.0.0
 	github.com/go-kit/kit v0.9.0
-	github.com/go-stack/stack v1.8.0 // indirect
 	github.com/golang/protobuf v1.3.2 // indirect
 	github.com/opentracing/opentracing-go v1.1.0 // indirect
 	github.com/prometheus/common v0.6.0
