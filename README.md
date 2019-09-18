@@ -45,11 +45,11 @@ following:
 2. Generate Prometheus rules
 
 ```bash
-$ slo-builder build examples/*-slo.yaml > examples/rules.yaml
+$ slo-builder build examples/slos/*.yaml > examples/generated-rules/output.yaml
 ```
 
-> You can check more examples inside [examples](./examples) folder and the generated
-Prometheuls rules [examples/rules.yaml](./examples/rules.yaml)
+> You can check more examples inside [examples](./examples/slos) folder and the generated
+Prometheuls [rules](./examples/generated-rules/output.yaml)
 
 ## Steps to an SLO
 
