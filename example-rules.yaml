@@ -24,6 +24,11 @@ groups:
     expr: "0.100000"
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
+  - record: job:slo_labels_info
+    expr: "1"
+    labels:
+      channel: slo-alerts
+      name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_volume:max
     expr: |
       1.5 * max_over_time(
@@ -63,6 +68,11 @@ groups:
   - record: job:slo_error_budget:ratio
     expr: "0.001000"
     labels:
+      name: PaymentsServiceSearchErrors
+  - record: job:slo_labels_info
+    expr: "1"
+    labels:
+      channel: slo-alerts
       name: PaymentsServiceSearchErrors
   - record: job:slo_error_rate_errors:rate1m
     expr: |
@@ -221,6 +231,10 @@ groups:
         )
   - record: job:slo_error_budget:ratio
     expr: "0.100000"
+    labels:
+      name: AdminVerificationLatency90
+  - record: job:slo_labels_info
+    expr: "1"
     labels:
       name: AdminVerificationLatency90
   - record: job:slo_latency_total:rate1m
@@ -401,6 +415,11 @@ groups:
   - record: job:slo_error_budget:ratio
     expr: "0.010000"
     labels:
+      name: AdminVerificationLatency99
+  - record: job:slo_labels_info
+    expr: "1"
+    labels:
+      channel: slo-alerts
       name: AdminVerificationLatency99
   - record: job:slo_latency_total:rate1m
     expr: |
