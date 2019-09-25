@@ -57,7 +57,7 @@ var (
 				"severity": "ticket", // TODO: "page",
 			},
 			Expr: `
-(
+((
   job:slo_error:ratio1h > on(name) group_left() (14.4 * job:slo_error_budget:ratio)
 and
   job:slo_error:ratio5m > on(name) group_left() (14.4 * job:slo_error_budget:ratio)
@@ -67,7 +67,7 @@ or
   job:slo_error:ratio6h > on(name) group_left() (6.0 * job:slo_error_budget:ratio)
 and
   job:slo_error:ratio30m > on(name) group_left() (6.0 * job:slo_error_budget:ratio)
-)
+)) * on(name) group_left(channel) job:slo_labels_info
 			`,
 		},
 		rulefmt.Rule{
@@ -77,7 +77,7 @@ and
 				"severity": "ticket",
 			},
 			Expr: `
-(
+((
   job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
 and
   job:slo_error:ratio2h > on(name) group_left() (3.0 * job:slo_error_budget:ratio)
@@ -87,7 +87,7 @@ or
   job:slo_error:ratio3d > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
 and
   job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)
-)
+)) * on(name) group_left(channel) jobs:slo_labels_info
 			`,
 		},
 	}

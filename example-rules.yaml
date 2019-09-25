@@ -657,18 +657,20 @@ groups:
     expr: (job:slo_latency_total:rate28d - job:slo_latency_observation:rate28d) /
       job:slo_latency_total:rate28d
   - alert: SLOErrorBudgetFastBurn
-    expr: "\n(\n  job:slo_error:ratio1h > on(name) group_left() (14.4 * job:slo_error_budget:ratio)\nand\n
+    expr: "\n((\n  job:slo_error:ratio1h > on(name) group_left() (14.4 * job:slo_error_budget:ratio)\nand\n
       \ job:slo_error:ratio5m > on(name) group_left() (14.4 * job:slo_error_budget:ratio)\n)\nor\n(\n
       \ job:slo_error:ratio6h > on(name) group_left() (6.0 * job:slo_error_budget:ratio)\nand\n
-      \ job:slo_error:ratio30m > on(name) group_left() (6.0 * job:slo_error_budget:ratio)\n)\n\t\t\t"
+      \ job:slo_error:ratio30m > on(name) group_left() (6.0 * job:slo_error_budget:ratio)\n))
+      * on(name) group_left(channel) job:slo_labels_info\n\t\t\t"
     for: 1m
     labels:
       severity: ticket
   - alert: SLOErrorBudgetSlowBurn
-    expr: "\n(\n  job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)\nand\n
+    expr: "\n((\n  job:slo_error:ratio1d > on(name) group_left() (3.0 * job:slo_error_budget:ratio)\nand\n
       \ job:slo_error:ratio2h > on(name) group_left() (3.0 * job:slo_error_budget:ratio)\n)\nor\n(\n
       \ job:slo_error:ratio3d > on(name) group_left() (1.0 * job:slo_error_budget:ratio)\nand\n
-      \ job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)\n)\n\t\t\t"
+      \ job:slo_error:ratio6h > on(name) group_left() (1.0 * job:slo_error_budget:ratio)\n))
+      * on(name) group_left(channel) jobs:slo_labels_info\n\t\t\t"
     for: 1h
     labels:
       severity: ticket
