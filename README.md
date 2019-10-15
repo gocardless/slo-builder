@@ -3,6 +3,13 @@
 This repo provides a framework that developers can use to specify system SLOs
 without requiring in-depth Prometheus knowledge.
 
+## Installation
+
+Run the following command outside of a `go.mod` repository to install the `slo-builder` binary.
+```
+go get -u github.com/gocardless/slo-builder/cmd/slo-builder
+```
+
 ## Why?
 
 SLOs are often formulated in business terms first, then translated into
