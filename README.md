@@ -1,4 +1,4 @@
-# slo-alerts [![Documentation](https://godoc.org/github.com/gocardless/slo-builder/pkg/templates?status.svg)](http://godoc.org/github.com/gocardless/slo-builder/pkg/templates)
+# slo-builder [![Documentation](https://godoc.org/github.com/gocardless/slo-builder/pkg/templates?status.svg)](http://godoc.org/github.com/gocardless/slo-builder/pkg/templates)
 
 This repo provides a framework that developers can use to specify system SLOs
 without requiring in-depth Prometheus knowledge.
