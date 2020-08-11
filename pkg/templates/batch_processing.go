@@ -87,7 +87,7 @@ func (b BatchProcessingSLO) Rules() []rulefmt.Rule {
 			Record: "job:slo_batch_throughput_target:max",
 			Labels: b.joinLabels(),
 			Expr: fmt.Sprintf(
-				`job:slo_batch_volume:max / %d`, time.Duration(b.Deadline)/time.Second,
+				`job:slo_batch_volume:max{name="%s"} / %d`, b.Name, time.Duration(b.Deadline)/time.Second,
 			),
 		},
 		rulefmt.Rule{
