@@ -41,7 +41,7 @@ groups:
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput_target:max
-    expr: job:slo_batch_volume:max / 7200
+    expr: job:slo_batch_volume:max{name="MarkPaymentsAsPaidMeetsDeadline"} / 7200
     labels:
       name: MarkPaymentsAsPaidMeetsDeadline
   - record: job:slo_batch_throughput:interval
