@@ -6,9 +6,20 @@ without requiring in-depth Prometheus knowledge.
 ## Installation
 
 Run the following command outside of a `go.mod` repository to install the `slo-builder` binary.
+
 ```
 go get -u github.com/gocardless/slo-builder/cmd/slo-builder
 ```
+
+You also need to ensure your `go/bin` directory is available in your `$PATH`:
+
+```bash
+export PATH="$HOME/go/bin:$PATH"
+```
+
+## Examples
+
+See [`example-definitions.yaml`](./example-definitions.yaml) and [`example-rules.yaml`](./example-rules.yaml) for full examples of all available SLO templates.
 
 ## Why?
 
@@ -36,7 +47,7 @@ example. This framework offers a collection of predefined templates that map to
 different types of system, and can help someone unfamiliar with SLOs quickly
 produce rules that Just Work.
 
-When forumating SLOs in business terms (1), you can use these predefined
+When formulating SLOs in business terms (1), you can use these predefined
 templates to help inform your selections. This framework can then produce the
 rules (2) that generate a common input to multi-windowed alerts (3), which are
 included at the end of this SLO pipeline.
