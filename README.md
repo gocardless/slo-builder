@@ -5,7 +5,7 @@ without requiring in-depth Prometheus knowledge.
 
 ## Installation
 
-Run the following command outside of a `go.mod` repository to install the `slo-builder` binary.
+Run the following command **outside of a `go.mod` repository** to install the `slo-builder` binary.
 
 ```
 go get -u github.com/gocardless/slo-builder/cmd/slo-builder
