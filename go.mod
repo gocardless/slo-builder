@@ -13,6 +13,6 @@ require (
 	github.com/prometheus/prometheus v0.0.0-20190710134608-e5b22494857d
 	github.com/spaolacci/murmur3 v1.1.0 // indirect
 	golang.org/x/sync v0.0.0-20190423024810-112230192c58 // indirect
-	golang.org/x/sys v0.0.0-20220406163625-3f8b81556e12 // indirect
+	golang.org/x/sys v0.1.0 // indirect
 	gopkg.in/yaml.v2 v2.2.2
 )
