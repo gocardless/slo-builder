@@ -34,7 +34,13 @@ definitions:
         )
       labels:
         channel: slo-alerts
+      annotations:
+        summary: |
+          Annotations can show up.
 
+          Random runbook chosen.
+        runbook: https://backstage.gocardless.io/catalog/default/component/data-contracts/docs/runbook/stevelogs-data-contract-event-publish-failure/
+        dashboard: v2czLVxmk
   - template: LatencySLO
     definition:
       name: AdminVerificationLatency90

@@ -65,6 +65,13 @@ groups:
         sum by (namespace, release) (
           rate(http_request_duration_seconds_count{app="payments-service", handler=~"Routes::(Admin)?Search"}[%s])
         )
+    annotations:
+      dashboard: v2czLVxmk
+      runbook: https://backstage.gocardless.io/catalog/default/component/data-contracts/docs/runbook/stevelogs-data-contract-event-publish-failure/
+      summary: |
+        Annotations can show up.
+
+        Random runbook chosen.
   - record: job:slo_error_budget:ratio
     expr: "0.001000"
     labels:

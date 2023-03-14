@@ -37,6 +37,7 @@ type baseSLO struct {
 	Name   string            `json:"name"`
 	Budget float64           `json:"budget"`
 	Labels map[string]string `json:"labels"`
+	Annotations map[string]string `json:"annotations"`
 }
 
 func (b baseSLO) GetName() string {
@@ -52,6 +53,7 @@ func (b baseSLO) Rules(additionals ...map[string]string) []rulefmt.Rule {
 					"budget": fmt.Sprintf("%f", b.Budget),
 				})...,
 			),
+			Annotations: b.Annotations,
 			Expr: "1",
 		},
 		rulefmt.Rule{
